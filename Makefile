@@ -18,3 +18,12 @@ test: venv
 
 run: venv
 	PYTHONPATH=src venv/bin/python src/main.py
+
+docker/build:
+	docker build --no-cache	--tag=rover .
+
+docker/run:
+	 docker run -it --rm --name rover rover
+
+docker/test:
+	 docker run rover /bin/sh -c 'make test'
