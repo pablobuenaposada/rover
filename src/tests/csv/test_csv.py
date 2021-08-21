@@ -1,4 +1,5 @@
 import tempfile
+from pathlib import Path
 
 import pandas as pd
 from pandas.core.frame import DataFrame
@@ -8,7 +9,7 @@ from models.sitters import Sitters
 
 
 class TestCsv:
-    FIXTURES_PATH = "src/tests/fixtures/"
+    FIXTURES_PATH = Path("src/tests/fixtures/")
 
     def test_read_csv(self):
         """Check that the pandas dataframe returned is the one we expect"""
@@ -23,7 +24,8 @@ class TestCsv:
                 ],
             }
         )
-        df = read_csv(self.FIXTURES_PATH+"test_valid.csv", ("sitter_email", "rating", "sitter")
+        df = read_csv(
+            self.FIXTURES_PATH / "test_valid.csv", ("sitter_email", "rating", "sitter")
         )  # PABLO
 
         assert isinstance(df, DataFrame)

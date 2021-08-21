@@ -3,15 +3,16 @@ import tempfile
 import pandas as pd
 
 from main import OUTPUT_COLUMNS, main
+from pathlib import Path
 
 
 class TestMain:
-    FIXTURES_PATH = "src/tests/fixtures/"
+    FIXTURES_PATH = Path("src/tests/fixtures/")
 
     def test_main(self):
         """Execute the main behaviour with a predefined csv and check the resultant csv"""
         with tempfile.NamedTemporaryFile() as temp:
-            main(self.FIXTURES_PATH+"reviews.csv", temp.name)
+            main(self.FIXTURES_PATH / "reviews.csv", temp.name)
             result_df = pd.read_csv(temp.name, usecols=OUTPUT_COLUMNS)
 
             # check that the columns are ones we expect

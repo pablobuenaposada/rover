@@ -1,11 +1,12 @@
 import argparse
+from pathlib import Path
 
 from csv_utils.csv_utils import read_csv, write_csv
 from models.sitters import Sitters
 
-DEFAULT_INPUT_FILENAME = "reviews.csv"
+DEFAULT_INPUT_FILENAME = Path("reviews.csv")
 INPUT_COLUMNS = ("sitter_email", "rating", "sitter")
-DEFAULT_OUTPUT_FILENAME = "sitters.csv"
+DEFAULT_OUTPUT_FILENAME = Path("sitters.csv")
 OUTPUT_COLUMNS = ["email", "name", "profile_score", "ratings_score", "search_score"]
 
 
