@@ -8,6 +8,8 @@ from models.sitters import Sitters
 
 
 class TestCsv:
+    FIXTURES_PATH = "src/tests/fixtures/"
+
     def test_read_csv(self):
         """Check that the pandas dataframe returned is the one we expect"""
         expected_df = pd.DataFrame(
@@ -21,8 +23,7 @@ class TestCsv:
                 ],
             }
         )
-        df = read_csv(
-            "src/tests/fixtures/test_valid.csv", ("sitter_email", "rating", "sitter")
+        df = read_csv(self.FIXTURES_PATH+"test_valid.csv", ("sitter_email", "rating", "sitter")
         )  # PABLO
 
         assert isinstance(df, DataFrame)
