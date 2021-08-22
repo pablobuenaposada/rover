@@ -11,10 +11,7 @@ format/isort: venv
 format/black: venv
 	venv/bin/black --verbose src
 
-format/isort: venv
-	venv/bin/isort src
-
-format: venv format/isort format/black format/isort
+format: venv format/isort format/black
 
 test: venv
 	PYTHONPATH=src venv/bin/pytest src/tests
