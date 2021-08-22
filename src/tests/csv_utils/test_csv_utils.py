@@ -8,7 +8,7 @@ from csv_utils.csv_utils import read_csv, write_csv
 from models.sitters import Sitters
 
 
-class TestCsv:
+class TestCsvUtils:
     FIXTURES_PATH = Path("src/tests/fixtures/")
 
     def test_read_csv(self):
