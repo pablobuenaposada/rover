@@ -45,13 +45,13 @@ class Sitter:
     profile_score: int = 0
     ratings_score: float = 0
     search_score: float = 0
-    ratings: List[int] = field(default_factory=list)
+    _ratings: List[int] = field(default_factory=list)
 
     def __post_init__(self):
         self.profile_score = _calculate_profile_score(self.name)
-        self.search_score = _calculate_search_score(self.profile_score, self.ratings)
+        self.search_score = _calculate_search_score(self.profile_score, self._ratings)
 
     def add_stay(self, rating):
-        self.ratings.append(rating)
-        self.ratings_score = _calculate_ratings_score(self.ratings)
-        self.search_score = _calculate_search_score(self.profile_score, self.ratings)
+        self._ratings.append(rating)
+        self.ratings_score = _calculate_ratings_score(self._ratings)
+        self.search_score = _calculate_search_score(self.profile_score, self._ratings)

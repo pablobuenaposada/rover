@@ -17,7 +17,7 @@ class TestModel:
         assert sitter.name == "Pablo"
         assert sitter.email == "pablo@gmail.com"
         assert sitter.profile_score == 0.96
-        assert sitter.ratings == []
+        assert sitter._ratings == []
         assert sitter.ratings_score == 0
         assert sitter.search_score == 0.96
 
