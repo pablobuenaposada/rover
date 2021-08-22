@@ -27,7 +27,7 @@ class Sitters:
             self._sitters[normalized_email].add_stay(rating)
 
     @property
-    def get_sitters(self):
+    def sitters(self):
         return sorted(
             list(self._sitters.values()), key=lambda x: (-x.search_score, x.name)
         )

@@ -17,7 +17,7 @@ class TestSitters:
 
     def test_add_stay(self):
         sitters = Sitters()
-        assert len(sitters.get_sitters) == 0  # empty of sitters for now
+        assert len(sitters.sitters) == 0  # empty of sitters for now
 
         sitters.add_stay("foo", "email1", 0)
         assert sitters._sitters["email1"].search_score == 0.34  # new sitter
@@ -28,8 +28,8 @@ class TestSitters:
         sitters.add_stay("banana", "email2", 0)
         assert sitters._sitters["email2"].search_score == 0.52  # new sitter
 
-        assert len(sitters.get_sitters) == 2
-        all_names = [sitter.name for sitter in sitters.get_sitters]
+        assert len(sitters.sitters) == 2
+        all_names = [sitter.name for sitter in sitters.sitters]
         assert "foo", "banana" in all_names
         # bar has the same email as a previous sitter so this name shouldn't be in the list
         assert "bar" not in all_names
@@ -51,10 +51,10 @@ class TestSitters:
         # internally the order is the same as the stays join the system
         assert internal_order == ["email1", "email2", "email3", "email4"]
 
-        all_sitters = sitters.get_sitters
+        all_sitters = sitters.sitters
 
         # quick check about the type of sitters returned
-        for sitter in sitters.get_sitters:
+        for sitter in sitters.sitters:
             assert isinstance(sitter, Sitter)
 
         assert len(all_sitters) == 4

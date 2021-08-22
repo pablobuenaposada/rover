@@ -45,7 +45,7 @@ class TestCsvUtils:
         sitters = Sitters()
         sitters.add_stay(*stay)
         with tempfile.NamedTemporaryFile() as temp:
-            write_csv(sitters.get_sitters, temp.name, OUTPUT_COLUMNS)
+            write_csv(sitters.sitters, temp.name, OUTPUT_COLUMNS)
             assert open(temp.name).read() == expected_content
 
     @pytest.mark.parametrize(
