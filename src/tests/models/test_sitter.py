@@ -14,6 +14,7 @@ from models.sitter import (
 class TestModel:
     def test_init(self):
         sitter = Sitter("Pablo", "pablo@gmail.com")
+        assert isinstance(sitter, Sitter)
         assert sitter.name == "Pablo"
         assert sitter.email == "pablo@gmail.com"
         assert sitter.profile_score == 0.96
