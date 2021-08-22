@@ -1,9 +1,9 @@
 import tempfile
+from pathlib import Path
 
 import pandas as pd
 
 from main import OUTPUT_COLUMNS, main
-from pathlib import Path
 
 
 class TestMain:

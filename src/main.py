@@ -25,4 +25,7 @@ if __name__ == "__main__":
     parser.add_argument("--input", default=DEFAULT_INPUT_FILENAME)
     parser.add_argument("--output", default=DEFAULT_OUTPUT_FILENAME)
     args = parser.parse_args()
-    main(args.input if args.input != "" else DEFAULT_INPUT_FILENAME, args.output if args.output != "" else DEFAULT_OUTPUT_FILENAME)
+    main(
+        args.input if args.input != "" else DEFAULT_INPUT_FILENAME,
+        args.output if args.output != "" else DEFAULT_OUTPUT_FILENAME,
+    )
