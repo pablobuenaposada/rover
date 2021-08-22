@@ -16,7 +16,7 @@ class Sitters:
         return name.lower()
 
     def add_stay(self, name, email, rating):
-        """Computes a new stay for a new or existent sitter's email"""
+        """Stores and computes a new stay for a new or existent sitter"""
         normalized_email = self._normalize_email(email)
         if normalized_email in self._sitters:
             # if the sitter is in place then only update it
@@ -28,6 +28,7 @@ class Sitters:
 
     @property
     def sitters(self):
+        """Get all the sitters ordered by descending search score"""
         return sorted(
             list(self._sitters.values()), key=lambda x: (-x.search_score, x.name)
         )
