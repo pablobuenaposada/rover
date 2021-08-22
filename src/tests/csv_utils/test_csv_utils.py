@@ -13,6 +13,7 @@ class TestCsvUtils:
 
     def test_read_csv(self):
         """Check that the pandas dataframe returned is the one we expect"""
+        fixture = self.FIXTURES_PATH / "test_valid.csv"
         expected_df = pd.DataFrame(
             {
                 "rating": [5, 2, 3],
@@ -24,9 +25,7 @@ class TestCsvUtils:
                 ],
             }
         )
-        df = read_csv(
-            self.FIXTURES_PATH / "test_valid.csv", ("sitter_email", "rating", "sitter")
-        )  # PABLO
+        df = read_csv(fixture, ("sitter_email", "rating", "sitter"))
 
         assert isinstance(df, DataFrame)
         assert df.equals(expected_df)
@@ -34,7 +33,10 @@ class TestCsvUtils:
     def test_write_csv(self):
         """check that the csv generated contains what we expect"""
         stay = ["Lauren B.", "user4739@gmail.com", 5]
-        expected_content = "email,name,profile_score,ratings_score,search_score\nuser4739@gmail.com,Lauren B.,1.35,5,1.72\n"
+        expected_content = (
+            "email,name,profile_score,ratings_score,search_score\n"
+            "user4739@gmail.com,Lauren B.,1.35,5,1.72\n"
+        )
 
         sitters = Sitters()
         sitters.add_stay(*stay)

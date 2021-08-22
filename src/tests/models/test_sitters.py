@@ -36,7 +36,8 @@ class TestSitters:
 
     def test_get_sitters_order(self):
         """
-        Let's check that the sitters are returned in descending order by search_score and by alphabetical name in case of draw
+        Let's check that the sitters are returned in descending order by search_score and
+        by alphabetical name in case of draw.
         The correct order by score should be email2, email4, email3 and email1.
         """
         # let's create an scenario of sitter and stays
@@ -57,7 +58,9 @@ class TestSitters:
             assert isinstance(sitter, Sitter)
 
         assert len(all_sitters) == 4
-        # sitters are returned from more score to less score, and note that in case of draw between email3 and email4, email4 takes precedence since name "c" is before name "d"
+        # sitters are returned from more score to less score,
+        # and note that in case of draw between email3 and email4, email4 takes precedence
+        # since name "c" is before name "d"
         assert (all_sitters[0].email, all_sitters[0].search_score) == ("email2", 0.67)
         assert (all_sitters[1].email, all_sitters[1].search_score) == ("email4", 0.57)
         assert (all_sitters[2].email, all_sitters[2].search_score) == ("email3", 0.57)

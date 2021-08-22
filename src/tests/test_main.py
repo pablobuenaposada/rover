@@ -10,9 +10,12 @@ class TestMain:
     FIXTURES_PATH = Path("src/tests/fixtures/")
 
     def test_main(self):
-        """Execute the main behaviour with a predefined csv and check the resultant csv"""
+        """
+        Execute the main behaviour with a predefined csv and check the resultant csv
+        """
         with tempfile.NamedTemporaryFile() as temp:
-            main(self.FIXTURES_PATH / "reviews.csv", temp.name)
+            fixture = self.FIXTURES_PATH / "reviews.csv"
+            main(fixture, temp.name)
             result_df = pd.read_csv(temp.name, usecols=OUTPUT_COLUMNS)
 
             # check that the columns are ones we expect

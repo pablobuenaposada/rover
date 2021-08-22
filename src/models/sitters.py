@@ -3,8 +3,8 @@ from models.sitter import Sitter
 
 class Sitters:
     """
-    All sitters would be stored in a dictionary where the key would be sitter's email and the value
-    would be a Sitter instance
+    All sitters would be stored in a dictionary where the key would be sitter's email
+    and the value would be a Sitter instance
     """
 
     def __init__(self):
