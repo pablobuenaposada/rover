@@ -85,7 +85,7 @@ PYTHONPATH=src venv/bin/python src/main.py --output= --input=
 Reading: reviews.csv
 Writing: output/sitters.csv
 ```
-Note that virtual env is getting created and used automatically.
+Note that virtual env is getting created (only first time) and used automatically.
 
 Then check inside `output/` folder you should have a file called `sitters.csv`, you might want to delete this file first to just prove that the csv is getting generated after this command since I already deliver one there as asked in the instructions.
 
@@ -130,3 +130,14 @@ venv/lib/python3.6/site-packages/pandas/compat/__init__.py:120
 -- Docs: https://docs.pytest.org/en/stable/warnings.html
 =========================================================================== 44 passed, 1 warning in 0.93s ===========================================================================
 ```
+
+# Discussion question
+- Describe how you would approach API design for a backend service to provide sitter and rank data to a client/web frontend.
+have a `POST` `domain/api/v1/stay` 202
+  `GET` `domain/api/v1/sitter/{id}` 200
+  `GET` `domain/api/v1/sitter?order=asc` 200 paginated
+  
+  
+  
+  
+  
