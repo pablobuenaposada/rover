@@ -13,3 +13,4 @@ requirements
 BUSCAR PABLOS Y ELIMINARLOS
 version de python
 trabajar con paths no con strings
+los args del make run

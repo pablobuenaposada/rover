@@ -6,7 +6,7 @@ from models.sitters import Sitters
 
 DEFAULT_INPUT_FILENAME = Path("reviews.csv")
 INPUT_COLUMNS = ("sitter_email", "rating", "sitter")
-DEFAULT_OUTPUT_FILENAME = Path("sitters.csv")
+DEFAULT_OUTPUT_FILENAME = Path("output/sitters.csv")
 OUTPUT_COLUMNS = ["email", "name", "profile_score", "ratings_score", "search_score"]
 
 
@@ -25,4 +25,4 @@ if __name__ == "__main__":
     parser.add_argument("--input", default=DEFAULT_INPUT_FILENAME)
     parser.add_argument("--output", default=DEFAULT_OUTPUT_FILENAME)
     args = parser.parse_args()
-    main(args.input, args.output)
+    main(args.input if args.input != "" else DEFAULT_INPUT_FILENAME, args.output if args.output != "" else DEFAULT_OUTPUT_FILENAME)

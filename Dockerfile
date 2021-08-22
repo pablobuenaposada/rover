@@ -7,4 +7,4 @@ COPY Makefile requirements.txt reviews.csv /usr/src/app
 
 RUN make venv
 
-CMD ["make", "run"]
+CMD ["make", "output=output/sitters_docker.csv", "run"]
