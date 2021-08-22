@@ -13,6 +13,7 @@ from models.sitter import (
 
 class TestModel:
     def test_init(self):
+        """Basic test ensuring that instance is correctly created"""
         sitter = Sitter("Pablo", "pablo@gmail.com")
         assert isinstance(sitter, Sitter)
         assert sitter.name == "Pablo"
@@ -21,21 +22,6 @@ class TestModel:
         assert sitter._ratings == []
         assert sitter.ratings_score == 0
         assert sitter.search_score == 0.96
-
-    @pytest.mark.parametrize(
-        "ratings, expected_search_score",
-        (
-            ([], 0.38),
-            ([0], 0.34),
-            ([5], 0.84),
-            ([5, 5], 1.3),
-        ),
-    )
-    def test_add_stay(self, ratings, expected_search_score):
-        sitter = Sitter("foo", "bar")
-        for rating in ratings:
-            sitter.add_stay(rating)
-        assert sitter.search_score == expected_search_score
 
     @pytest.mark.parametrize(
         "name, expected_occurrences",
@@ -68,7 +54,7 @@ class TestModel:
             ([1], 1),
             ([1, 2, 3], 2),
             ([1, 2, 3, 4], 2.5),
-            ([1, 0, 0], 0.33),
+            ([1, 0, 0], 0.33),  # force more than 2 decimals calculation
         ),
     )
     def test__calculate_ratings_score(self, ratings, expected_rating_score):
@@ -95,4 +81,23 @@ class TestModel:
     def test__calculate_search_score(
         self, ratings, profile_score, expected_search_score
     ):
+        """This is the scenario described in the instructions"""
         assert _calculate_search_score(profile_score, ratings) == expected_search_score
+
+    @pytest.mark.parametrize(
+        "ratings, expected_search_score, expected_ratings_score",
+        (
+            ([], 0.38, 0),
+            ([0], 0.34, 0),
+            ([5], 0.84, 5),
+            ([5, 5], 1.3, 5),
+            ([5, 4], 1.2, 4.5),
+        ),
+    )
+    def test_add_stay(self, ratings, expected_search_score, expected_ratings_score):
+        """Check that a sitters gets updated correctly in every stay"""
+        sitter = Sitter("foo", "bar")
+        for rating in ratings:
+            sitter.add_stay(rating)
+        assert sitter.search_score == expected_search_score
+        assert sitter.ratings_score == expected_ratings_score

@@ -16,8 +16,12 @@ class TestSitters:
         assert Sitters._normalize_email(original) == normalized
 
     def test_add_stay(self):
+        """
+        Check that stays are correctly added to the sitters list if they are new
+        or already in the system
+        """
         sitters = Sitters()
-        assert len(sitters.sitters) == 0  # empty of sitters for now
+        assert len(sitters.sitters) == 0  # empty sitters for now
 
         sitters.add_stay("foo", "email1", 0)
         assert sitters._sitters["email1"].search_score == 0.34  # new sitter
