@@ -1,5 +1,7 @@
+dataclasses==0.8
+numpy==1.19.5
+pandas==1.1.5
+# test packages, in a real project these should be in another requirements file
 pytest
 black
 isort
-dataclasses==0.8
-pandas==1.1.5
