@@ -11,12 +11,14 @@ OUTPUT_COLUMNS = ["email", "name", "profile_score", "ratings_score", "search_sco
 
 
 def main(input, output):
+    print("Reading:", input)
     df = read_csv(input, INPUT_COLUMNS)
 
     sitters = Sitters()
     for row in df.itertuples():
         sitters.add_stay(row.sitter, row.sitter_email, row.rating)
 
+    print("Writing:", output)
     write_csv(sitters.get_sitters, output, OUTPUT_COLUMNS)
 
 

@@ -16,11 +16,13 @@ class Sitters:
         return name.lower()
 
     def add_stay(self, name, email, rating):
+        """Computes a new stay for a new or existent sitter's email"""
         normalized_email = self._normalize_email(email)
         if normalized_email in self._sitters:
             # if the sitter is in place then only update it
             self._sitters[normalized_email].add_stay(rating)
-        else:  # if it's not, add the sitter and then update its first scores
+        else:
+            # if it's not, add the sitter and then update its first scores
             self._sitters[normalized_email] = Sitter(name, normalized_email)
             self._sitters[normalized_email].add_stay(rating)
 

@@ -27,6 +27,7 @@ def _calculate_ratings_score(ratings):
 
 def _calculate_search_score(profile_score, ratings):
     if len(ratings) >= 10:
+        # more than 9 ratings then this score is the same as rating score
         return _calculate_ratings_score(ratings)
     # else weighted average calculation
     return round(
