@@ -133,11 +133,68 @@ venv/lib/python3.6/site-packages/pandas/compat/__init__.py:120
 
 # Discussion question
 - Describe how you would approach API design for a backend service to provide sitter and rank data to a client/web frontend.
-have a `POST` `domain/api/v1/stay` 202
-  `GET` `domain/api/v1/sitter/{id}` 200
-  `GET` `domain/api/v1/sitter?order=asc` 200 paginated
-  
-  
-  
-  
-  
+
+### Add new stay
+`POST` `https://domain.com/api/v1/stay`
+
+body:
+```json
+  {
+    "name": "pablo",
+    "email": "pablo@gmail.com",
+    "rating": 4.5
+  }
+```
+response:
+```bash
+  HTTP 201 CREATED
+  {
+    "id": 345,
+    "email": "pablo@gmail.com",
+    "rating": 4.5
+  }
+```
+
+### Get specific sitter information
+`GET` `https://domain.com/api/v1/sitters/{id}`
+
+response:
+```json
+  HTTP 200 OK
+  {
+    "id": 2,
+    "name": "pablo",
+    "email": "pablo@gmail.com",
+    "profile_score": 0.96,
+    "ratings_score": 0,
+    "search_score": 0.96
+  }
+```
+
+### Get all sitters ordered by search score
+`GET` `https://domain.com/api/v1/sitters/?ordering=-search_score`
+
+response:
+```json
+  HTTP 200 OK
+  {
+    "count": 1023,
+    "next": "https://domain.com/api/v1/sitters/?ordering=-search_score&page=2",
+    "previous": "https://domain.com/api/v1/sitters/?ordering=-search_score&page=1",
+    "results": [
+      {
+        "id": 2,
+        "name": "pablo",
+        "email": "pablo@gmail.com",
+        "search_score": 0.96
+      },
+      {
+        "id": 1,
+        "name": "jhon",
+        "email": "jhon@gmail.com",
+        "search_score": 0.85
+      }
+    ]
+  }
+```
+(Note the descending order with `-` and the pagination)
