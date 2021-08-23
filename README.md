@@ -140,7 +140,6 @@ venv/lib/python3.6/site-packages/pandas/compat/__init__.py:120
 body:
 ```json
   {
-    "name": "pablo",
     "email": "pablo@gmail.com",
     "rating": 4.5
   }

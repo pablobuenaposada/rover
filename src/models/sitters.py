@@ -15,7 +15,7 @@ class Sitters:
         """Get rid of not important things from the email"""
         return name.lower()
 
-    def add_stay(self, name, email, rating):
+    def add_stay(self, name: str, email: str, rating: float):
         """Stores and computes a new stay for a new or existent sitter"""
         normalized_email = self._normalize_email(email)
         if normalized_email in self._sitters:
