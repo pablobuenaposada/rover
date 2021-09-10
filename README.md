@@ -1,199 +1,119 @@
-# Generated CSV file
-You will find a copy of the generated csv in `output/sitters.csv`.
+# Rover Coding Project
 
-# Usage with Docker
-Step in project folder: 
-```bash
-cd Rover-Takehome-Web/
-```
-Build docker image with:
-```bash
-make docker/build
-```
+Rover.com was destroyed in a terrible Amazon Web Services and GitHub accident!
+Thankfully, no dogs were harmed, but we will have to rebuild our site using
+data we retrieved from the Google search index. 
 
-### Run CSV generator
-do:
-```bash
-make docker/run
-```
-would output something like:
-```bash
-docker run --rm -it -v /Users/pablobuenaposada/Desktop/rover/output/:/usr/src/app/output/ rover
-PYTHONPATH=src venv/bin/python src/main.py --output=output/sitters_docker.csv --input=
-Reading: reviews.csv
-Writing: output/sitters_docker.csv
-```
-then check inside `output/` folder you should have a file called `sitters_docker.csv` that has been extracted from the docker container to your local.
-```bash
-pablobuenaposada$ cat output/sitters_docker.csv
-email,name,profile_score,ratings_score,search_score
-user7508@t-mobile.com,Leilani R.,1.15,3.5,3.5
-user9029@t-mobile.com,Melissa C.,1.35,4.0,2.94
-user7903@hotmail.com,Faridah D.,1.15,4.6,2.88
-user7650@verizon.net,Robert S.,1.15,3.57,2.85
-...
-```
+Your task is to recreate a search ranking algorithm and compute search
+scores for our sitters.
 
-### Run tests
-```bash
-make docker/test
-```
-output:
-```bash
-docker run rover /bin/sh -c 'make test'
-PYTHONPATH=src venv/bin/pytest src/tests
-============================= test session starts ==============================
-platform linux -- Python 3.6.9, pytest-6.2.4, py-1.10.0, pluggy-0.13.1
-rootdir: /usr/src/app
-collected 44 items
+# Requirements 
 
-src/tests/test_main.py .                                                 [  2%]
-src/tests/csv_utils/test_csv_utils.py .......                            [ 18%]
-src/tests/models/test_sitter.py ................................         [ 90%]
-src/tests/models/test_sitters.py ....                                    [100%]
+To recreate our search rankings, you'll create *a simple command-line program* that can be run
+locally and that will input and output csv data.
 
-============================== 44 passed in 3.96s ==============================
-```
+Additionally, there is a short **discussion question**
+to answer (see below) about how you would build this system in the real
+world. 
 
-# Usage without Docker
-Step in project folder:
-```bash
-cd Rover-Takehome-Web/
-```
-### Run CSV generator
-Make sure that the command `python3 --version` in your local outputs this:
-```bash
-Python 3.6.9
-```
-Then you can just do:
-```bash
-make run
-```
-output:
-```bash
-python3 -m venv venv
-venv/bin/pip install -r requirements.txt
-Collecting dataclasses==0.8 (from -r requirements.txt (line 1))
-  Using cached https://files.pythonhosted.org/packages/fe/ca/75fac5856ab5cfa51bbbcefa250182e50441074fdc3f803f6e76451fab43/dataclasses-0.8-py3-none-any.whl
-Collecting numpy==1.19.5 (from -r requirements.txt (line 2))
-...
-Installing collected packages: dataclasses, numpy, six, python-dateutil, pytz, pandas, toml, py, zipp, typing-extensions, importlib-metadata, pyparsing, packaging, iniconfig, pluggy, attrs, pytest, regex, tomli, pathspec, mypy-extensions, typed-ast, appdirs, click, black, isort
-Successfully installed appdirs-1.4.4 attrs-21.2.0 black-21.7b0 click-8.0.1 dataclasses-0.8 importlib-metadata-4.6.4 iniconfig-1.1.1 isort-5.9.3 mypy-extensions-0.4.3 numpy-1.19.5 packaging-21.0 pandas-1.1.5 pathspec-0.9.0 pluggy-0.13.1 py-1.10.0 pyparsing-2.4.7 pytest-6.2.4 python-dateutil-2.8.2 pytz-2021.1 regex-2021.8.21 six-1.16.0 toml-0.10.2 tomli-1.2.1 typed-ast-1.4.3 typing-extensions-3.10.0.0 zipp-3.5.0
-PYTHONPATH=src venv/bin/python src/main.py --output= --input=
-/Users/pablobuenaposada/Desktop/rover/venv/lib/python3.6/site-packages/pandas/compat/__init__.py:120: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
-  warnings.warn(msg)
-Reading: reviews.csv
-Writing: output/sitters.csv
-```
-Note that virtual env is getting created (only first time) and used automatically.
+Please include a README with instructions on how to setup and run your project
+locally, as well as a copy of the output CSV you generate. Note that we are primarily Mac users. 
 
-Then check inside `output/` folder you should have a file called `sitters.csv`, you might want to delete this file first to just prove that the csv is getting generated after this command since I already deliver one there as asked in the instructions.
+**Please use the language that you feel will best show your skills.** Keep in
+mind that if you are brought for an in-person interview, you may be asked to continue
+building upon this solution. Feel free to use whatever libraries or packages you wish. 
 
-```bash
-pablobuenaposada$ cat output/sitters_docker.csv
-email,name,profile_score,ratings_score,search_score
-user7508@t-mobile.com,Leilani R.,1.15,3.5,3.5
-user9029@t-mobile.com,Melissa C.,1.35,4.0,2.94
-user7903@hotmail.com,Faridah D.,1.15,4.6,2.88
-user7650@verizon.net,Robert S.,1.15,3.57,2.85
-...
-```
+Finally, if you have any questions, don't hesitate to ask.
 
-Alternatively you can choose source and/or destination csv paths with the following arguments:
-```bash
-make run output=whatever.csv input=other_source.csv
-```
-by default output is `output/sitters.csv` and input is `reviews.csv`
+## Recreating the Search Ranking Algorithm
+We were able to write a script and scrape the Google index for all of the
+reviews customers have left for their stays with sitters. 
 
-### Run tests
-```bash
-make test
-```
-output:
-```bash
-PYTHONPATH=src venv/bin/pytest src/tests
-================================================================================ test session starts ================================================================================
-platform darwin -- Python 3.6.9, pytest-6.2.4, py-1.10.0, pluggy-0.13.1
-rootdir: /Users/pablobuenaposada/Desktop/rover
-collected 44 items
+We have saved that information in the attached CSV.
 
-src/tests/test_main.py .                                                                                                                                                      [  2%]
-src/tests/csv_utils/test_csv_utils.py .......                                                                                                                                 [ 18%]
-src/tests/models/test_sitter.py ................................                                                                                                              [ 90%]
-src/tests/models/test_sitters.py ....                                                                                                                                         [100%]
+Your command-line program should import the data to hold in memory (no need to use an actual database) and use it to recreate our search algorithm. At Rover, we write domain-driven code, so using an Object Oriented or other domain-centric approach will set you up for success in the in person interview. For example, one viable approach is modeling your data as if you were going to save it using a relational database.
 
-================================================================================= warnings summary ==================================================================================
-venv/lib/python3.6/site-packages/pandas/compat/__init__.py:120
-  /Users/pablobuenaposada/Desktop/rover/venv/lib/python3.6/site-packages/pandas/compat/__init__.py:120: UserWarning: Could not import the lzma module. Your installed Python is incomplete. Attempting to use lzma compression will result in a RuntimeError.
-    warnings.warn(msg)
+If you are using a language that doesn't traditionally use an OO or domain-centric approach, please discuss this with the person who sent you this prompt in advance of beginning work, in order to have the best chance of success if you advance to the in person interview.
 
--- Docs: https://docs.pytest.org/en/stable/warnings.html
-=========================================================================== 44 passed, 1 warning in 0.93s ===========================================================================
-```
+Here's how the search ranking algorithm will work:
 
-# Discussion question
+- For each sitter, we first calculate a Profile Score and a Ratings Score.
+  These are then used to calculate the overall Search Score, which is used for search rankings.
+
+- The Profile Score is 5 times the fraction of the English alphabet comprised by the
+  distinct letters in what we've recovered of the sitter's name. For example, the sitter name `Leilani R.` has 6 distinct letters.
+
+- The Ratings Score is the average of their stay ratings.
+
+- The Search Score is a weighted average of the Profile Score and Ratings
+  Score. When a sitter has no stays, their Search Score is equal to the Profile Score. When a sitter has 10 or more
+  stays, their Search Score is equal to the Ratings Score. The idea is that as a sitter gets more reviews, we will weigh the
+  Ratings Score more heavily.
+
+- Scores should be limited to two decimal places.
+
+## Output a list of Sitters
+
+Your program should output a csv called `sitters.csv`, containing the following
+columns:
+
+* Sitter email (`email`)
+* Sitter name (`name`)
+* Profile Score (`profile_score`)
+* Ratings Score (`ratings_score`)
+* Search Score (`search_score`)
+
+The csv should be sorted by Search Score (descending), sorting alphabetically on the
+sitter name as a tie-breaker.
+
+## Hint for Testing the Search Ranking Algorithm
+
+Suppose there is a sitter whose Profile Score is 2.5 and who gets a rating of
+5.0 with every stay. Then their Search Score should behave like this:
+
+| Stay          | Search Score |
+| ------------- | ------------- |
+| 0 | 2.50
+| 1 | 2.75
+| 2 | 3.00
+| 3 | 3.25
+| 4 | 3.50
+| 5 | 3.75
+| 6 | 4.00
+| 7 | 4.25
+| 8 | 4.50
+| 9 |  4.75
+| 10 | 5.00
+| 11 | 5.00
+| 12 | 5.00
+
+## Discussion Question
+
+Imagine you are designing a production web application based on the exercise you've just completed. The application will compute the search scores
+for sitters, return a list of search results based on those scores, and display them to the user through a web UI. Please answer **ONE** of the following discussion questions about the approach you'd take:
+
+- How would you adjust the calculation and storage of search scores in a production application?
+- Describe a technical implementation for the frontend / UI for this application. How would the frontend manage state?
+- What infrastructure choices might you make to build and host this project at scale? Suppose your web application must return fast search results with a peak of 10 searches per second. 
 - Describe how you would approach API design for a backend service to provide sitter and rank data to a client/web frontend.
 
-### Add new stay
-`POST` `https://domain.com/api/v1/stay`
+Write your answer in the README inside your project github repo. Please keep your answer concise, but provide as much detail as you feel is necessary; we're not looking for a thesis, just an understanding of how you think about solutions and how you convey your thoughts in the written word.
 
-body:
-```json
-  {
-    "email": "pablo@gmail.com",
-    "rating": 4.5
-  }
-```
-response:
-```bash
-  HTTP 201 CREATED
-  {
-    "id": 345,
-    "email": "pablo@gmail.com",
-    "rating": 4.5
-  }
-```
+## When you're done with the project...
 
-### Get specific sitter information
-`GET` `https://domain.com/api/v1/sitters/{id}`
+When you're done with the project, compress your project directory into a Zip file or similar, making sure to include the output file, `sitters.csv`. Then, reply to the email you received from us with your attachment.
 
-response:
-```json
-  HTTP 200 OK
-  {
-    "id": 2,
-    "name": "pablo",
-    "email": "pablo@gmail.com",
-    "profile_score": 0.96,
-    "ratings_score": 0,
-    "search_score": 0.96
-  }
-```
+# Evaluation 
 
-### Get all sitters ordered by search score
-`GET` `https://domain.com/api/v1/sitters/?ordering=-search_score`
+### Checklist:
+- [ ] Have you modeled the data ingested from the CSV in a way that would support storage in a relational database?
+- [ ] Are Profile, Rating, and Search Scores computed correctly?
+- [ ] Does the output file include all necessary columns, and is it in descending order based on Search Score? 
+- [ ] Does the README include setup/running instructions (ideally for Mac)?
+- [ ] Does the README include your answer to the Discussion Question?
+- [ ] Have you included your CLI code, README, **and output file** in the Zip folder?
+- [ ] Have you written tests to verify that your code is working as expected?
 
-response:
-```json
-  HTTP 200 OK
-  {
-    "count": 1023,
-    "next": "https://domain.com/api/v1/sitters/?ordering=-search_score&page=2",
-    "previous": "https://domain.com/api/v1/sitters/?ordering=-search_score&page=1",
-    "results": [
-      {
-        "id": 2,
-        "name": "pablo",
-        "email": "pablo@gmail.com",
-        "search_score": 0.96
-      },
-      {
-        "id": 1,
-        "name": "jhon",
-        "email": "jhon@gmail.com",
-        "search_score": 0.85
-      }
-    ]
-  }
-```
-(Note the descending order with `-` and the pagination)
+**Lastly:** The work you create here should be representative of code that we'd expect to
+receive from you if you were hired tomorrow (proper abstractions, tests
+for the scoring algorithm calculation, best practices, etc). 
